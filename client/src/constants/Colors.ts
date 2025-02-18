@@ -6,19 +6,19 @@ export const Colors = {
 
   // Background Colors
   background: {
-    light: '#FFFFFF', 
-    dark: '#181818',
-    gray: '#F5F5F5', // Light Gray for Sections
-    black: '#000000',
+    light: 'rgb(255, 255, 255)', 
+    dark: 'rgb(0, 0, 0)',
+    gray: 'rgb(245, 245, 245)', // Light Gray for Sections
+    blur: 'rgba(0, 0, 0, 0.7)', // Dark Overlay for Modals
   },
 
   // Text Colors
   text: {
-    light: '#11181C',
-    dark: '#E1E8ED',
-    muted: '#687076',
-    white: '#FFFFFF',
-    black: '#000000',
+    light: 'rgb(17, 24, 28)',
+    dark: 'rgb(225, 232, 237)',
+    muted: 'rgb(104, 112, 118)',
+    white: 'rgb(255, 255, 255)',
+    black: 'rgb(0, 0, 0)',
   },
 
   // Tint Colors (Branding Highlights)
@@ -30,15 +30,15 @@ export const Colors = {
 
   // Icon Colors
   icon: {
-    light: '#687076',
-    dark: '#AAB8C2',
+    light: 'rgb(104, 112, 118)',
+    dark: 'rgb(170, 184, 194)',
     active: 'rgb(24, 119, 242)',
-    inactive: '#687076',
+    inactive: 'rgb(104, 112, 118)',
   },
 
   // Tab Navigation Colors
   tabIcon: {
-    default: '#687076',
+    default: 'rgb(104, 112, 118)',
     selected: 'rgb(24, 119, 242)',
   },
 
@@ -46,7 +46,7 @@ export const Colors = {
   button: {
     primary: 'rgb(0, 122, 255)',
     secondary: 'rgb(28, 28, 28)',
-    disabled: '#C0C0C0',
+    disabled: 'rgb(192, 192, 192)',
     danger: 'rgb(255, 59, 48)',
   },
 
@@ -61,9 +61,9 @@ export const Colors = {
   // Gradients
   gradients: {
     instagram: ['rgb(255, 105, 180)', 'rgb(255, 80, 90)', 'rgb(131, 58, 180)'],
-    sunset: ['#FF7E5F', '#FD267D'],
-    ocean: ['#36D1DC', '#5B86E5'],
-    fire: ['#FF512F', '#DD2476'],
+    sunset: ['rgb(255, 126, 95)', 'rgb(253, 38, 125)'],
+    ocean: ['rgb(54, 209, 220)', 'rgb(91, 134, 229)'],
+    fire: ['rgb(255, 81, 47)', 'rgb(221, 36, 118)'],
   },
 
   // Shadows & Borders
@@ -73,13 +73,13 @@ export const Colors = {
   },
 
   border: {
-    light: '#E1E8ED',
-    dark: '#2F3336',
+    light: 'rgb(225, 232, 237)',
+    dark: 'rgb(47, 51, 54)',
     primary: 'rgb(24, 119, 242)',
   },
 
   // Additional UI Colors
   notification: 'rgb(255, 59, 48)', // Red Badge
   overlay: 'rgba(0, 0, 0, 0.5)', // Dark Overlay for Modals
-  placeholder: '#AAB8C2', // Input Placeholder Text
+  placeholder: 'rgb(170, 184, 194)', // Input Placeholder Text
 }

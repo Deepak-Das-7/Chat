@@ -7,25 +7,27 @@ interface ButtonProps {
     title: string
     onPress: () => void
     isGradient?: boolean
-    widthType?: 'small' | 'medium' | 'large' 
+    widthType?: 'small' | 'medium' | 'large'
+    type?: 'square' | 'circle'
 }
 
-const Button: React.FC<ButtonProps> = ({ title, onPress, isGradient = true, widthType = "large" }) => {
+const Button: React.FC<ButtonProps> = ({ title, onPress, isGradient = true, widthType = "large", type = "square" }) => {
 
-    const width = widthType === 'small' ? '30%' : widthType === 'medium' ? '60%' : '100%';
+    const width = widthType === 'small' ? '25%' : widthType === 'medium' ? '60%' : '100%';
+    const borderRadius = type === 'circle' ? 100 : 12;
 
     return (
-        <View style={ { width }}>
+        <View style={[{ width, borderRadius }]}>
             <TouchableOpacity onPress={onPress} activeOpacity={0.8}>
                 {isGradient ? (
                     <LinearGradient
                         colors={[Colors.primary, Colors.tint.dark]}
-                        style={styles.button}
+                        style={[styles.button, { borderRadius }]}
                     >
                         <Text style={styles.buttonText}>{title}</Text>
                     </LinearGradient>
                 ) : (
-                    <View style={[styles.button, styles.plainButton]}>
+                    <View style={[styles.button, styles.plainButton, { borderRadius }]}>
                         <Text style={styles.buttonText}>{title}</Text>
                     </View>
                 )}
@@ -39,7 +41,6 @@ export default Button
 const styles = StyleSheet.create({
     button: {
         height: 50,
-        borderRadius: 12,
         justifyContent: 'center',
         alignItems: 'center',
         shadowColor: Colors.shadow.dark,
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     plainButton: {
-        backgroundColor: Colors.primary,
+        backgroundColor: Colors.placeholder,
     },
     buttonText: {
         color: Colors.text.white,

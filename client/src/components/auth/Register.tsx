@@ -2,16 +2,48 @@ import { StyleSheet, TextInput, View, Image } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from "@/src/constants/Colors"
 import Button from '../small/Button'
+import { router } from 'expo-router'
+import CustomAlert from '../small/Alert'
+
+type AlertType = 'info' | 'success' | 'error' | 'warning'
 
 const Register = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('') // Optional field
     const [isTyping, setIsTyping] = useState(false)
+    const [alertVisible, setAlertVisible] = useState(false)
+    const [alertData, setAlertData] = useState<{ title: string, message: string, type: AlertType }>({
+        title: "", message: "", type: 'info'
+    })
 
-    const handleFocus = () => { setIsTyping(true) }
-    const handleBlur = () => { setIsTyping(false) }
-    
+    const handleFocus = () => setIsTyping(true)
+    const handleBlur = () => setIsTyping(false)
+
+    const showAlert = (title: string, message: string, type: AlertType) => {
+        setAlertData({ title, message, type })
+        setAlertVisible(true)
+    }
+
+    const handleRegister = () => {
+        if (!username.trim()) {
+            showAlert("Registration Failed", "Usernames is required", 'error')
+            return
+        }
+        if (!password.trim()) {
+            showAlert("Registration Failed", "Password is required", 'error')
+            return
+        }
+
+        console.log("Register Pressed", { username, password, email })
+        showAlert("Registration Success", "You have successfully registered!", 'success')
+
+        setTimeout(() => {
+            setAlertVisible(false)
+            router.replace('/auth/Auth')
+        }, 2000)
+    }
+
     return (
         <View style={styles.container}>
             {!isTyping && (
@@ -19,22 +51,12 @@ const Register = () => {
             )}
             <TextInput
                 style={styles.input}
-                placeholder="Full Name"
+                placeholder="Username"
                 placeholderTextColor={Colors.text.muted}
-                value={name}
-                onChangeText={setName}
-                onFocus={handleFocus}  // Hide image when focusing
-                onBlur={handleBlur}    // Show image again when focus is lost
-            />
-            <TextInput
-                style={styles.input}
-                placeholder="Email"
-                placeholderTextColor={Colors.text.muted}
-                keyboardType="email-address"
-                value={email}
-                onChangeText={setEmail}
-                onFocus={handleFocus}  // Hide image when focusing
-                onBlur={handleBlur}    // Show image again when focus is lost
+                value={username}
+                onChangeText={setUsername}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
             />
             <TextInput
                 style={styles.input}
@@ -43,10 +65,30 @@ const Register = () => {
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
-                onFocus={handleFocus}  // Hide image when focusing
-                onBlur={handleBlur}    // Show image again when focus is lost
+                onFocus={handleFocus}
+                onBlur={handleBlur}
             />
-            <Button title="Register" onPress={() => { console.log("register pressed") }} widthType='large' />
+            <TextInput
+                style={styles.input}
+                placeholder="Email (Optional)"
+                placeholderTextColor={Colors.text.muted}
+                keyboardType="email-address"
+                value={email}
+                onChangeText={setEmail}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
+            />
+            <Button title="Register" onPress={handleRegister} widthType='large' type='circle'/>
+
+            {/* CustomAlert Component */}
+            <CustomAlert
+                visible={alertVisible}
+                title={alertData.title}
+                message={alertData.message}
+                onClose={() => setAlertVisible(false)}
+                onConfirm={() => setAlertVisible(false)}
+                type={alertData.type}
+            />
         </View>
     )
 }
@@ -78,22 +120,5 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowOffset: { width: 0, height: 2 },
         elevation: 3,
-    },
-    button: {
-        width: '100%',
-        height: 50,
-        borderRadius: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        shadowColor: Colors.shadow.dark,
-        shadowOpacity: 0.2,
-        shadowOffset: { width: 0, height: 4 },
-        elevation: 5,
-        marginTop: 20,
-    },
-    buttonText: {
-        color: Colors.text.white,
-        fontSize: 18,
-        fontWeight: 'bold',
     }
 })
