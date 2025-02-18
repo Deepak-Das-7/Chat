@@ -1,17 +1,36 @@
 import { router } from "expo-router";
-import { Button, Text, View } from "react-native";
+import { useEffect, useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { View, Text } from "react-native";
 
-export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <Button title="Button" onPress={() => {router.push("/auth")}}/>
-    </View>
-  );
+export default function RootLayout() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+
+        if (token) {
+          router.replace("/chat");
+        } else {
+          router.replace("/auth/Auth");
+        }
+      } catch (error) {
+        console.error("Error checking auth:", error);
+        router.replace("/auth/Auth");
+      }
+
+      setLoading(false);
+    };
+
+    checkAuth();
+  }, []);
+
+  if (loading)
+    return (
+      <View>
+        <Text>Root Layout</Text>
+      </View>
+    );
 }

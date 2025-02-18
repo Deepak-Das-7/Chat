@@ -4,12 +4,12 @@ import { Colors } from "@/src/constants/Colors"
 import Button from '../small/Button'
 
 const Login = () => {
-    const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [isTyping, setIsTyping] = useState(false)
 
-    const handleFocus = () => { setIsTyping(true) }
-    const handleBlur = () => { setIsTyping(false) }
+    const handleFocus = () => setIsTyping(true)
+    const handleBlur = () => setIsTyping(false)
 
     return (
         <View style={styles.container}>
@@ -18,13 +18,12 @@ const Login = () => {
             )}
             <TextInput
                 style={styles.input}
-                placeholder="Email"
+                placeholder="Username"
                 placeholderTextColor={Colors.text.muted}
-                keyboardType="email-address"
-                value={email}
-                onChangeText={setEmail}
-                onFocus={handleFocus}  // Hide image when focusing
-                onBlur={handleBlur}    // Show image again when focus is lost
+                value={username}
+                onChangeText={setUsername}
+                onFocus={handleFocus}
+                onBlur={handleBlur}
             />
             <TextInput
                 style={styles.input}
@@ -33,10 +32,10 @@ const Login = () => {
                 secureTextEntry
                 value={password}
                 onChangeText={setPassword}
-                onFocus={handleFocus}  // Hide image when focusing
-                onBlur={handleBlur}    // Show image again when focus is lost
+                onFocus={handleFocus}
+                onBlur={handleBlur}
             />
-            <Button title="Login" onPress={() => { console.log("login pressed") }} widthType='large' />
+            <Button title="Login" onPress={() => console.log("login pressed")} widthType='large' type='circle' />
         </View>
     )
 }
