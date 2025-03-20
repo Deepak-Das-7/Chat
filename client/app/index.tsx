@@ -14,6 +14,7 @@ export default function RootLayout() {
         if (token) {
           router.replace("/chat");
         } else {
+          // router.replace("/chat");
           router.replace("/auth/Auth");
         }
       } catch (error) {

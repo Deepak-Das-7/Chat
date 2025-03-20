@@ -2,6 +2,7 @@ import { StyleSheet, TextInput, View, Image } from 'react-native'
 import React, { useState } from 'react'
 import { Colors } from "@/src/constants/Colors"
 import Button from '../small/Button'
+import { router } from 'expo-router'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -35,7 +36,7 @@ const Login = () => {
                 onFocus={handleFocus}
                 onBlur={handleBlur}
             />
-            <Button title="Login" onPress={() => console.log("login pressed")} widthType='large' type='circle' />
+            <Button title="Login" onPress={() => router.replace("/chat")} widthType='large' type='circle' />
         </View>
     )
 }
